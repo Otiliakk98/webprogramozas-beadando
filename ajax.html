@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Feladat - Web-programozás házi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="html5.html">HTML5</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html" class="active">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <h3>AJAX Feladat:</h3>
+            <p>Ez az oldal a CRUD műveleteket mutatja be lokális adatokkal.</p>
+            <p>Az eredeti API nem volt elérhető.</p>
+        </aside>
+        
+        <div class="content">
+            <section>
+                <h2>Adatok lekérése</h2>
+                <button id="readData" class="btn">Adatok betöltése</button>
+                <div id="dataContainer" class="data-container"></div>
+                <div id="statsContainer" class="stats-container"></div>
+            </section>
+            
+            <section class="form-section">
+                <h2>Új rekord létrehozása</h2>
+                <form id="createForm">
+                    <div class="form-group">
+                        <label for="createName">Név:</label>
+                        <input type="text" id="createName" placeholder="Név" maxlength="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="createHeight">Magasság:</label>
+                        <input type="text" id="createHeight" placeholder="Magasság" maxlength="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="createWeight">Súly:</label>
+                        <input type="text" id="createWeight" placeholder="Súly" maxlength="30" required>
+                    </div>
+                    <button type="submit" class="btn">Létrehozás</button>
+                </form>
+                <div id="createFeedback" class="feedback"></div>
+            </section>
+            
+            <section class="form-section">
+                <h2>Rekord módosítása</h2>
+                <div class="form-group">
+                    <label for="updateId">Rekord ID:</label>
+                    <input type="text" id="updateId" placeholder="Rekord ID">
+                    <button id="getDataForId" class="btn">Adatok lekérése</button>
+                </div>
+                <form id="updateForm">
+                    <div class="form-group">
+                        <label for="updateName">Név:</label>
+                        <input type="text" id="updateName" placeholder="Név" maxlength="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateHeight">Magasság:</label>
+                        <input type="text" id="updateHeight" placeholder="Magasság" maxlength="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateWeight">Súly:</label>
+                        <input type="text" id="updateWeight" placeholder="Súly" maxlength="30" required>
+                    </div>
+                    <button type="submit" class="btn">Módosítás</button>
+                </form>
+                <div id="updateFeedback" class="feedback"></div>
+            </section>
+            
+            <section class="form-section">
+                <h2>Rekord törlése</h2>
+                <form id="deleteForm">
+                    <div class="form-group">
+                        <label for="deleteId">Rekord ID:</label>
+                        <input type="text" id="deleteId" placeholder="Rekord ID" required>
+                    </div>
+                    <button type="submit" class="btn delete-btn">Törlés</button>
+                </form>
+                <div id="deleteFeedback" class="feedback"></div>
+            </section>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Készítette: Károly Otília | Neptun kód: Z5922J</p>
+    </footer>
+
+    <script src="ajax.js"></script>
+</body>
+</html>
