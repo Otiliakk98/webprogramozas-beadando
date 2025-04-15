@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 API-k</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Egyedi stílusok az API szekciókhoz */
+        section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            margin: 5px;
+            padding: 8px 15px;
+        }
+        #sseOutput {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="html5.html" class="active">HTML5</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <h3>API-k</h3>
+            <ul>
+                <li><a href="#webstorage">📦 Web Storage</a></li>
+                <li><a href="#webworkers">👷 Web Workers</a></li>
+                <li><a href="#sse">📡 SSE Szimuláció</a></li>
+                <li><a href="#geolocation">📍 Geolocation</a></li>
+                <li><a href="#dragdrop">👆 Drag & Drop</a></li>
+                <li><a href="#canvas">🎨 Canvas</a></li>
+                <li><a href="#svg">🖼️ SVG</a></li>
+            </ul>
+        </aside>
+
+        <div class="content">
+            <!-- 1. Web Storage -->
+            <section id="webstorage">
+                <h2>📦 Web Storage</h2>
+                <input type="text" id="storageInput" placeholder="Írj ide valamit">
+                <button onclick="saveToStorage()">Mentés</button>
+                <button onclick="clearStorage()">Törlés</button>
+                <p id="storageOutput"></p>
+            </section>
+
+            <!-- 2. Web Workers -->
+            <section id="webworkers">
+                <h2>👷 Web Workers</h2>
+                <button onclick="startWorker()">Start Számolás</button>
+                <button onclick="stopWorker()">Stop</button>
+                <p id="workerOutput"></p>
+            </section>
+
+            <!-- 3. SSE Szimuláció -->
+            <section id="sse">
+                <h2>📡 Server-Sent Events</h2>
+                <button onclick="startSSE()">Start</button>
+                <button onclick="stopSSE()">Stop</button>
+                <div id="sseOutput">Üzenetek:</div>
+            </section>
+
+            <!-- 4. Geolocation -->
+            <section id="geolocation">
+                <h2>📍 Geolocation</h2>
+                <button onclick="getLocation()">Hol vagyok?</button>
+                <p id="geoOutput"></p>
+                <div id="map" style="width:100%; height:200px; display:none;"></div>
+            </section>
+
+            <!-- 5. Drag & Drop -->
+            <section id="dragdrop">
+                <h2>👆 Drag & Drop</h2>
+                <div id="dropZone" style="width:200px; height:100px; border:2px dashed #336699; padding:10px;">
+                    Húzd ide a képet!
+                </div>
+                <img id="dragImage" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMzM2Njk5Ii8+PHRleHQgeD0iMjUiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRST1A8L3RleHQ+PC9zdmc+" 
+                     draggable="true" style="width:50px; cursor:move;">
+            </section>
+
+            <!-- 6. Canvas -->
+            <section id="canvas">
+                <h2>🎨 Canvas</h2>
+                <canvas id="myCanvas" width="300" height="150" style="border:1px solid #000;"></canvas>
+                <button onclick="drawOnCanvas()">Rajzolj!</button>
+            </section>
+
+            <!-- 7. SVG -->
+            <section id="svg">
+                <h2>🖼️ SVG</h2>
+                <svg width="300" height="150" id="svgDemo">
+                    <circle cx="50" cy="50" r="40" fill="#336699" />
+                    <rect x="120" y="10" width="80" height="80" fill="#e74c3c" />
+                </svg>
+                <button onclick="animateSVG()">Animálj!</button>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>Készítette: Károly Otília | Neptun kód: Z5922J</p>
+    </footer>
+
+    <script>
+        // ===== 1. Web Storage =====
+        function saveToStorage() {
+            const input = document.getElementById('storageInput').value;
+            localStorage.setItem('userInput', input);
+            document.getElementById('storageOutput').textContent = `Mentve: "${input}"`;
+        }
+
+        function clearStorage() {
+            localStorage.removeItem('userInput');
+            document.getElementById('storageOutput').textContent = "Adat törölve!";
+        }
+
+        // Oldal betöltésekor
+        window.addEventListener('load', () => {
+            const savedData = localStorage.getItem('userInput');
+            if (savedData) {
+                document.getElementById('storageOutput').textContent = `Korábbi mentés: "${savedData}"`;
+            }
+        });
+
+        // ===== 2. Web Workers =====
+        let worker;
+        function startWorker() {
+            worker = new Worker(URL.createObjectURL(
+                new Blob([`
+                    let result = 0;
+                    for (let i = 0; i < 100000000; i++) result += i;
+                    postMessage(result);
+                `], { type: 'text/javascript' })
+            ));
+            worker.onmessage = (e) => {
+                document.getElementById('workerOutput').textContent = `Eredmény: ${e.data}`;
+            };
+        }
+
+        function stopWorker() {
+            if (worker) {
+                worker.terminate();
+                document.getElementById('workerOutput').textContent = "Számítás leállítva.";
+            }
+        }
+
+        // ===== 3. SSE Szimuláció =====
+        let sseInterval;
+        function startSSE() {
+            let counter = 0;
+            const output = document.getElementById('sseOutput');
+            output.innerHTML = "Kapcsolat indítva...<br>";
+            sseInterval = setInterval(() => {
+                counter++;
+                const eventTypes = ["update", "alert", "ping"];
+                const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+                const data = `ID: ${counter} | Típus: ${randomType} | Idő: ${new Date().toLocaleTimeString()}`;
+                output.innerHTML += `[Event] ${data}<br>`;
+                output.scrollTop = output.scrollHeight;
+            }, 1000);
+        }
+
+        function stopSSE() {
+            clearInterval(sseInterval);
+            document.getElementById('sseOutput').innerHTML += "🔴 Kapcsolat lezárva.";
+        }
+
+        // ===== 4. Geolocation =====
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude.toFixed(4);
+                        const lon = position.coords.longitude.toFixed(4);
+                        document.getElementById('geoOutput').textContent = `Szélesség: ${lat}°, Hosszúság: ${lon}°`;
+                        
+                        // Térkép megjelenítése (opcionális)
+                        const map = document.getElementById('map');
+                        map.style.display = "block";
+                        map.innerHTML = `
+                            <iframe width="100%" height="100%" frameborder="0" style="border:0"
+                                src="https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.01},${lat-0.01},${lon+0.01},${lat+0.01}&marker=${lat},${lon}">
+                            </iframe>
+                        `;
+                    },
+                    (error) => alert(`Hiba: ${error.message}`)
+                );
+            } else {
+                alert("A böngésződ nem támogatja a geolokációt!");
+            }
+        }
+
+        // ===== 5. Drag & Drop =====
+        const dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', (e) => e.preventDefault());
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const img = document.getElementById('dragImage').cloneNode();
+            img.style.width = "100px";
+            dropZone.innerHTML = '';
+            dropZone.appendChild(img);
+        });
+
+        // ===== 6. Canvas =====
+        function drawOnCanvas() {
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Véletlen alakzatok
+            const colors = ['#336699', '#e74c3c', '#2ecc71'];
+            for (let i = 0; i < 5; i++) {
+                ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                ctx.beginPath();
+                ctx.arc(
+                    Math.random() * 300,
+                    Math.random() * 150,
+                    Math.random() * 30 + 10,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fill();
+            }
+        }
+
+        // ===== 7. SVG Animáció =====
+        function animateSVG() {
+            const svg = document.getElementById('svgDemo');
+            const circle = svg.querySelector('circle');
+            let pos = 0;
+            const interval = setInterval(() => {
+                pos = (pos + 2) % 200;
+                circle.setAttribute('cx', 50 + pos);
+                if (pos === 0) clearInterval(interval);
+            }, 20);
+        }
+
+        // Alapértelmezett Canvas rajz
+        drawOnCanvas();
+    </script>
+</body>
+</html>
