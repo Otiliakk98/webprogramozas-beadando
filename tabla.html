@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Táblázat-kezelő</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="tabla.html" class="active">Táblázat</a></li>
+            <li><a href="html5.html">HTML5</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <p>Ez egy oldalsáv.</p>
+        </aside>
+        <div class="content">
+            <h2>Táblázat-kezelő</h2>
+            
+            <div class="filter-section">
+                <input type="text" id="searchInput" placeholder="Keresés minden oszlopban...">
+                <button id="searchBtn">Keresés</button>
+                <button id="resetBtn">Szűrő törlése</button>
+            </div>
+            
+            <form id="dataForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="name">Név (kötelező):</label>
+                    <input type="text" id="name" required minlength="2" maxlength="50" placeholder="Minimum 2 karakter">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email (kötelező):</label>
+                    <input type="email" id="email" required placeholder="pl. nev@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="age">Életkor (18-99):</label>
+                    <input type="number" id="age" required min="18" max="99" placeholder="18-99 között">
+                </div>
+                <button type="submit" id="saveBtn">Mentés</button>
+                <button type="button" id="cancelBtn" style="display: none;">Mégse</button>
+            </form>
+            
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th data-column="name">Név ↑</th>
+                        <th data-column="email">Email ↑</th>
+                        <th data-column="age">Életkor ↑</th>
+                        <th>Műveletek</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>Készítette: Károly Otília | Neptun kód: Z5922J</p>
+    </footer>
+
+    <script src="tabla.js"></script>
+</body>
+</html>
