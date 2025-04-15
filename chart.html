@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChartJS - Táblázat és Diagram</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        table { border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; cursor: pointer; }
+        tr.selected { background-color: #e6f3ff; }
+        #chartContainer { max-width: 800px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <!-- Fejléc -->
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+
+    <!-- Menüsor -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="html5.html">HTML5</a></li>
+            <li><a href="chart.html" class="active">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <p>Válasszon ki egy sort!</p>
+        </aside>
+        <div class="content">
+            <!-- 5x5-ös táblázat és diagram -->
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>1. oszlop</th><th>2. oszlop</th><th>3. oszlop</th><th>4. oszlop</th><th>5. oszlop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>15</td><td>28</td><td>34</td><td>41</td><td>19</td></tr>
+                    <tr><td>22</td><td>38</td><td>45</td><td>12</td><td>31</td></tr>
+                    <tr><td>10</td><td>24</td><td>52</td><td>37</td><td>43</td></tr>
+                    <tr><td>29</td><td>13</td><td>47</td><td>21</td><td>35</td></tr>
+                    <tr><td>18</td><td>33</td><td>26</td><td>49</td><td>14</td></tr>
+                </tbody>
+            </table>
+            <div id="chartContainer">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lábléc -->
+    <footer>
+        <p>Készítette: Károly Otília | Neptun kód: Z5922J</p>
+    </footer>
+
+    <script src="chart.js"></script>
+</body>
+</html>
